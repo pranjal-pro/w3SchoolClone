@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../includes/head.ejs') %>
+<head>
+    <style>
+        .list ul{
+            padding: 0px;
+        }
+        .list li{
+            list-style: none;
+            text-indent: 0%;
+            padding: 2px 5px;
+            margin: 0px;
+            margin-bottom: 5px ;
+            background-color: #f3f3f3;
+            cursor: pointer;
+        }
+        .list li div{
+            pointer-events: none;
+        }
+        li:active{
+            
+        }
+        li div.card {
+            display: none;
+          }
+          
+        li div.card.active {
+            display: block;
+          }
+          li .button-toggle {
+            display: none;
+          }
+          
+          li .button-toggle.show {
+            display: inline-block;
+          }
+        .list{
+            list-style: none;
+            height: calc(100vh - 100px);
+            overflow-y: scroll;
+            width: 250px;
+            scrollbar-width: 20px;
+            scrollbar-color: #00000043;
+            position: fixed;
+            background: white;
+            float: left;
+            margin-right: 8px;
+        }
+        .footer{
+            height: 500px;
+            width: 100%;
+        }
+        .navbar{
+            height: 100px;
+        }
+    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="navbar sticky-top bg-dark d-flex text-white fw-bolder justify-content-center fs-1">Navbar</div>
+    <%- include('../includes/flash.ejs') %>
+    <main>
+        <div class="list">
+            <ul>
+                <li><div class="fs-2 text-dark fw-bold">Add Heading</div></li>
+                <li><div class="fs-4 text-dark ">Add Sub Heading</div></li>
+                <li><div class="fs-5 text-dark">Text</div></li>
+                <li><div><hr></div></li>
+                <li class="p-1 button-item cards">
+                    <div class="card bg-dark card-dark text-light" style="width: 80%;">
+                    <p class="card-title px-3 pt-2">Card Title</p>
+                    <div class="card-text bg-light text-dark mx-3 my-2 p-2">Text</div>
+                    <a href="" class="card-link btn btn-success px-3 m-3">Button</a>
+                    </div>
+                    <div class="card" style="width: 80%; background-color: #E7E9EB;">
+                    <p class="card-title px-3 pt-2">Card Title</p>
+                    <div class="card-text bg-light text-dark mx-3 my-2 p-2" style="border-left: green solid 5px;">Text</div>
+                    <a href="" class="card-link btn btn-success px-3 m-3">Button</a>
+                    </div>
+                    <div class="card text-dark" style="width: 80%; background-color: #d9eee1;">
+                    <p class="card-title px-3 pt-2">Card Title</p>
+                    <a href="" class="card-link btn btn-success px-3 m-3 ">Button</a>
+                    </div>
+                </li>
+                <div style="position: relative; bottom: 5px; background-color:#f3f3f3; cursor:pointer;" class="p-1">
+                <input type="radio" class="btn-check" name="button" id="button1" checked><label for="button1" class="btn">Dark</label>
+                <input type="radio" class="btn-check" name="button" id="button2"><label for="button2" class="btn">Light</label>
+                <input type="radio" class="btn-check" name="button" id="button3"><label for="button3" class="btn">Green</label>
+                <br>
+<input type="text" placeholder="Link for Button" class="mt-1" id="card-link"></div>
+                <li class="button-item"><div><a class="card-link btn btn-success px-4 my-2">Button</a>
+                    </div><input type="text" placeholder="Link for Button" ></li>
+            </ul>
+            <form class="position-absolute" style="bottom: 0;">
+                <button onclick="update()" class="btn btn-outline-success " style="width: 80%; margin:5% 10% 0; ">Update Page</button>
+                <button onclick="deleteTopic()"  class="btn btn-danger " style="width: 80%; margin: 2% 10% 10%;">Delete Page</button>
+            </form>
+        </div>
+        <div style="margin: 5px 5px 5px 250px; padding:5px;" class="d-flex justify-contnet-center align-items-center flex-column">
+            <h1 class="fs-1 text-dark fw-bolder" contenteditable="true" id="title" ><%- topic.topic %></h1>
+            <div class="d-flex justify-content-between" style="width: 100%;">
+                <button class="btn btn-success position-relative" id="next" contenteditable="true" ><%= topic.next %></button>
+                <button class="btn btn-success position-absolute" id="prev" contenteditable="true" style="right: 10px;"><%= topic.prev %></button>
+            </div>
+            <div id="innerHTML" class="p-3 m-3 bg-light" style="width: 100%; " contenteditable="true"><%- topic.innerHTML %> </div>
+            <div class="footer bg-dark d-flex text-white fw-bolder justify-content-center fs-1 align-items-center">Footer</div>
+        </div>
+    </main>
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const radioButtons = document.querySelectorAll('input[name="button"]');
+  const cards = document.querySelectorAll('.card');
+
+  let index= 0;
+  function showCard(cardIndex) {
+    console.log(index);
+    index= cardIndex;
+    console.log(index);
+    cards.forEach((card, index) => {
+      card.classList.toggle('active', index === cardIndex);
+    });
+  }
+  radioButtons.forEach((radio, index) => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        showCard(index);
+      }
+    });
+  });
+  showCard(index);
+
+
+  const listItems = document.querySelectorAll('ul li');
+  const innerDiv = document.getElementById('innerHTML');
+
+  listItems.forEach(item => {
+    item.addEventListener('click', () => {
+        let idx= 0;
+        if(item.classList.contains('cards'))
+            idx= index;
+        if(item.classList.contains('button-item')){
+            const button= item.getElementsByTagName('a')[idx];
+            let link= null;
+            if(item.classList.contains('cards'))
+            link= document.getElementById('card-link');
+            else link= item.getElementsByTagName('input')[0];
+            console.log(button, link);
+            if(link.value!== '')
+              button.setAttribute('href', link.value);
+            else return;
+        }
+        let outerHTML= '';
+        if(item.classList.contains('cards'))
+            outerHTML= item.getElementsByClassName('active')[0].outerHTML;
+        else outerHTML= item.querySelector('div').outerHTML;
+
+      const contentDiv = innerDiv.innerHTML+  outerHTML;
+      if (contentDiv) {
+        innerDiv.innerHTML = contentDiv;
+      }
+    });
+  });
+          });
+
+          async function deleteTopic(subId) {
+            try {
+              const response = await fetch(`/admin/subjects/<%= subject %>/<%= topic.id %>`, {
+                method: 'DELETE',
+              });
+
+              if (response.ok) {
+                location.replace('/admin/subjects/<%= subject%>');
+              } else {
+                const errorData = await response.json();
+                flash('error',`Error: ${errorData.message}`);
+              }
+            } catch (error) {
+              flash('error','An error occurred while deleting the subject');
+            }
+          };
+        
+        async function update(){
+            const title= document.querySelector('#title').innerText;
+            const innerHTML= document.querySelector('#innerHTML').innerHTML;
+            const next= document.querySelector('#next').innerText;
+            const prev= document.querySelector('#prev').innerText;
+            try {
+              const response = await fetch(`/admin/subjects/<%= subject %>/<%= topic._id %>`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title, innerHTML: innerHTML, next: next, prev: prev })
+                  });
+
+                  if (response.ok) {
+                      flash('success','App Updated successfully');
+                      response.redirected('/admin/subjects/<%= subject %>');
+                  } else {
+                      const errorData = await response.json();
+                      flash('error',`Error: ${errorData.message}`);
+                  }
+              } catch (error) {
+                  flash('error','An error occurred while updating the subject');
+              }
+            };
+        
+    </script>
+</body>
+</html>

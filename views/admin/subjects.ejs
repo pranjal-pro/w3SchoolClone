@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href=".">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/user" class="btn btn-link nav-link">User</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/subjects"class="btn btn-link nav-link">Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <%- include('../includes/flash.ejs') %>
+        
+       
+        <br><br><main class="container">
+            <section id="users">
+                <h2 class="mb-3">Subjects Management</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Subject ID</th>
+                            <th scope="col">Subject Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <% subjects.forEach(subject => { %>
+                            <tr>
+                                <td><%= subject.id %></td>
+                                <td><%= subject.subject %></td>
+                                <td>
+                                    <a class="btn btn-warning" href="/admin/subjects/<%= subject.id %>">Edit</a>
+                                    <button class="btn btn-danger" onclick="deleteSubject('<%= subject.id %>')">Delete</button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                        <tfoot class="bg-dark">
+                            <tr class="bg-dark">
+                                <form action="/admin/subjects" method="post">
+                                    <td colspan="2" class="bg-dark">
+                                        <label class="text-light" for="subject">Add Subject: </label>
+                                        <input placeholder="Subject" name="subject" id="subject" class="mx-3 px-3 bg-dark text-light mt-1" style="width: 80%;">
+                                    </td>
+                                    <td class="bg-dark"><button class="btn btn-outline-success px-4" type="submit">Add</button></td>
+                                </form>
+                            </tr>
+                        </tfoot>
+                </table>
+            </section>
+        </main>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function deleteSubject(subId) {
+            try {
+                const response = await fetch(`/admin/subjects/${subId}`, {
+                method: 'DELETE',
+              });
+              
+              if (response.ok) {
+                  location.reload(); 
+                } else {
+                    const errorData = await response.json();
+                    flash("error", `${errorData.message}`);
+                }
+            } catch (error) {
+                flash('error','An error occurred while deleting the subject');
+            }
+        };
+
+    </script>
+</body>
+</html>

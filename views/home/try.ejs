@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<%- include('../includes/head.ejs') %>
+
+<body>
+    <%- include('../includes/header.ejs') %>
+    <%- include('../includes/flash.ejs') %>
+    <div class="container mt-5 backBtn">
+        <button class="btn btn-primary" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </div>
+    <div style="width: 100vw; height:calc(100vh- 100px)">
+        <iframe style="width: 100vw; height:80vh;" src='<%= data.try[lang].url %>' frameborder="0"></iframe>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<h2 class="text-warning p-5"> <%= data.dropdown.page[idx- 1].title %> </h2>
+<div class="p-3 d-flex align-items-start justify-content-around gap-3 ">
+    <% if (idx== 4) { %>
+        <div class="d-flex display-content-between flex-wrap gap-3" >
+            <% for( let i = 0; i < data.dropdown.page[idx- 1].list.length; i++ ) { %>
+                <div class="card bg-dark p-2 mx-2 my-1" style="width: 20%;">
+                    <h2 class="text-warning"><%= data.dropdown.page[idx- 1].list[i].heading %></h2>
+                    <p class="text-light"><%= data.dropdown.page[idx- 1].list[i].description %></p>
+                </div>
+            <% } %>
+        </div>
+    <% } else { %> 
+        <% for( let i = 0; i < data.dropdown.heading.length; i++ ) { %>
+            <div class="d-flex flex-column align-items-start justify-content-between gap-3">
+                <div class="d-flex flex-column">
+                <h3  class="text-warning p-2"> <%= data.dropdown.heading[i].title %> </h3>
+                    <% for( let j = 0; j < data.dropdown.heading[i].list.length; j++ ) { %>
+                        <p  class="text-light p-2"> 
+                            <%= data.dropdown.heading[i].list[j] %>
+                            <a href="/home/<%= data.dropdown.heading[i].list[j] %>/<%= data.dropdown.page[idx- 1].list[0] %>"><span class="badge text-bg-warning mx-3 text-capitalize"><%= data.dropdown.page[idx- 1].list[0] %></span></a>
+                            <a href="/home/<%= data.dropdown.heading[i].list[j] %>/<%= data.dropdown.page[idx- 1].list[1] %>"><span class=" text-capitalize badge text-bg-warning "><%= data.dropdown.page[idx- 1].list[1] %></span> </a>
+                        </p>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    <% } %> 
+</div>

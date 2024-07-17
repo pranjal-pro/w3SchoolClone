@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../includes/head.ejs') %>
+<head>
+    <style>
+        ul{
+            padding: 0%;
+        }
+        li{
+            list-style: none;
+            text-indent: 0%;
+            padding: 0px;
+            padding-left: 0px;
+            margin: 0px;
+        }
+        .list{
+            list-style: none;
+            height: calc(100vh - 100px);
+            overflow-y: scroll;
+            width: 250px;
+            scrollbar-width: 20px;
+            scrollbar-color: #00000043;
+            position: fixed;
+            background: white;
+            float: left;
+            margin-right: 8px;
+        }
+        .list ul li a{
+            width: 100%;
+            height: 100%;
+            display: block;
+            text-decoration: none;
+            
+        }
+        @media (max-width: 767px) {
+            main div#page{
+                margin: 10px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('../includes/header.ejs') %>
+    <%- include('../includes/flash.ejs') %>
+    <div class="container mt-5 backBtn">
+        <button class="btn btn-primary" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </div>
+    <main>
+        <div class="list d-none d-md-block">
+            <ul>
+                <% subject.topics.forEach(item => { %>
+                    <li>
+                    <% if(item=== topic) {%> <a href="/home/<%- subject.subject %>/<%= item.topic %>" class="my-2 fs-5 text-capitalize bg-dark text-light px-3 py-1"><%= item.topic %></a>
+                    <% } else {%> <a href="/home/<%- subject.subject %>/<%= item.topic %>" class="my-2 fs-5 text-capitalize text-dark px-3"><%= item.topic %></a> <% } %>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+        <div style="margin: 5px 5px 5px 250px; padding:5px;" id="page" class="d-flex justify-contnet-center align-items-center flex-column">
+            <h1 class="text-capitalize text-dark fw-bolder fs-1"><%= topic.topic %></h1>
+            <div class="d-flex justify-content-between" style="width: 100%;">
+                <a href="<%- topic.next %>" class="btn btn-success">Next</a>
+                <a href="<%- topic.prev  %>" class="btn btn-success">Previous</a>
+            </div>
+            <div class="p-3 m-3" style="width: 100%;"><%- topic.innerHTML %></div>
+            <%- include('../includes/footer.ejs')  %>
+        </div>
+    </main>
+</body>
+</html>

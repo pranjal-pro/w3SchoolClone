@@ -1,0 +1,130 @@
+<style>
+  .search-container {
+    position: relative;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+}
+.suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+.suggestion:hover {
+    background-color: #f0f0f0;
+}
+@media (max-width: 768px) {
+  nav.first.navbar{
+    background: #ffffff;
+  }
+}
+</style>
+<header class="fixed-top bg-light">
+    <nav class="first navbar navbar-expand-md">
+        <div class="container-fluid ">
+            <a class="navbar-brand me-5" href="/home"><img src="/assets/logo.ico" alt="" width="40px"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-wrap me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">Tutorials</a>
+                  <div class="dropdown-menu">
+                    <%- include('dropdown.ejs', {data, idx: 1}) %>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">Exercises</a>
+                  <div class="dropdown-menu">
+                    <%- include('dropdown.ejs', {data, idx: 2}) %>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">Certificates</a>
+                  <div class="dropdown-menu">
+                    <%- include('dropdown.ejs', {data, idx: 3}) %>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="">Services</a>
+                  <div class="dropdown-menu">
+                    <%- include('dropdown.ejs', {data, idx: 4}) %>
+                  </div>
+                </li>
+              </ul>
+              <form class="d-flex" role="search" action="" class="btn-group btn-outline-dark rounded rounded-pill">
+                <input class="form-control btn border-success rounded rounded-pill" id="search-Bar" oninput="fetchSuggestions()" type="search" placeholder="Search" aria-label="Search">
+                <div id="suggestions" class="suggestions" style="width: 30%; left: 60%;"></div>
+                
+              </form>
+
+              <% if(currUser== null) { %>
+                <div class="d-none d-lg-block btn-group btn-outline-success ms-5">
+                  <a href="/login" class="btn btn-success">Log in</a>
+                  <a href="/signup" class="btn btn-outline-success">Sign Up</a>
+                </div>
+              <% }else if(currUser.admin) { %>
+                <div class="d-none d-lg-block btn-group btn-outline-success ms-5">
+                  <a href="/admin" class="btn btn-outline-success">Admin Dashbord</a>
+                  <a href="/logout" class="btn btn-success">Logout</a>
+                </div>
+              <% }else { %>
+                <div class="d-none d-lg-block btn-group btn-outline-success ms-5">
+                  <a href="/profile" class="btn btn-outline-success"><%- currUser.username %></a>
+                  <a href="/logout" class="btn btn-success">Logout</a>
+                </div>
+              <% } %>
+            </div>
+          </div>
+    </nav>
+    <nav class="bg-dark border-bottom border-body container-fluid d-flex justify-content-center align-items-center overflow-auto" data-bs-theme="dark">
+        <ul class="d-flex text-light justify-content-between container-fluid align-items-center my-1 gap-5 flex-grow-1">
+            <a class="text-decoration-none text-light" href="home/HTML/default"><li>HTML</li></a>
+            <a class="text-decoration-none text-light" href="home/CSS/default"><li>CSS</li></a>
+            <a class="text-decoration-none text-light" href="home/JS/default"><li>JAVASCRIPT</li></a>
+            <a class="text-decoration-none text-light" href="home/SQL/default"><li>SQL</li></a>
+            <a class="text-decoration-none text-light" href="home/Python/default"><li>PYTHON</li></a>
+            <a class="text-decoration-none text-light" href="home/Java/default"><li>JAVA</li></a>
+            <a class="text-decoration-none text-light" href="home/Cpp/default"><li>C++</li></a>
+            <a class="text-decoration-none text-light" href="home/C#/default"><li>C#</li></a>
+            <a class="text-decoration-none text-light" href="home/R/default"><li>R</li></a>
+            <a class="text-decoration-none text-light" href="home/AiMl/default"><li>AI ML</li></a>
+        </ul>
+    </nav>
+</header>
+<div style="height: 100px;"></div>
+<script>
+  async function fetchSuggestions() {
+      const query = document.getElementById('search-Bar').value;
+      if (query.length < 2) {
+          document.getElementById('suggestions').innerHTML = '';
+          return;
+      }
+
+      const response = await fetch(`/search/suggestions?q=${query}`);
+      const suggestions = await response.json();
+      displaySuggestions(suggestions);
+  }
+
+  function displaySuggestions(suggestions) {
+      const suggestionsContainer = document.getElementById('suggestions');
+      suggestionsContainer.innerHTML = '';
+      suggestions.forEach(suggestion => {
+          const div = document.createElement('div');
+          div.className = 'suggestion';
+          div.textContent = suggestion;
+          div.onclick = () => {
+              window.location.href = suggestion;
+          };
+          suggestionsContainer.appendChild(div);
+      });
+  }
+</script>

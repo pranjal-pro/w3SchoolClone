@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../includes/head.ejs') %>
+<body>
+    <%- include('../includes/header.ejs') %>
+    <%- include('../includes/flash.ejs') %>
+    <div class="d-flex flex-column justify-content-center align-items-center text-light py-5 px-3" style="background-color:#282A35;">
+        <h2 class="fw-bold text-light mt-5" style="font-size: 3.5rem;">Learn to Code</h2>
+        <h3 class="fs-5 py-3 my-2 mb-5 text-warning">With the world's largest web developer site.</h3>
+        <form class="d-flex" role="search" action="" id="form" class="text-light btn-group btn-outline-dark rounded rounded-pill">
+            <input class="form-control btn border-success rounded rounded-pill bg-light text-dark px-5" id="search-bar" oninput="fetchSuggest()"  type="search" placeholder="Search our tutorials" aria-label="Search">
+        </form>
+
+        <a href="/home/HTML/default" class="text-light font-decoration-none my-3 fw-bold">Not Sure Whter to Begin?</a>
+    </div>
+
+    <% for( let i = 0; i < data.courseDetailed.length; i++ ) { %>
+        <div class="d-md-flex justify-content-center gap-5 px-3 py-5 learning">
+            <div class="d-flex flex-column justify-content-center align-items-center my-4">
+                <h2 class="fw-bold" style="font-size: 3.5rem;"><%= data.courseDetailed[i].title %> </h2>
+                <h3 class="fs-5 py-3"><%= data.courseDetailed[i].description %></h3>
+                <a href="/home/<%= data.courseDetailed[i].title %>/refrences" class="btn btn-light py-2 rounded-pill m-2" style="width: 50%;"><%= data.courseDetailed[i].title %> Reference</a>
+                <a href="/home/<%= data.courseDetailed[i].title %>/certificate" class="btn btn-warning py-2  rounded-pill m-2" style="width: 50%;">Get Certificate</a>
+                <a href="/home/<%= data.courseDetailed[i].title %>/default" class="btn btn-success py-2 rounded-pill m-2" style="width: 50%;">Learn <%= data.courseDetailed[i].title %></a>
+            </div>
+            <div class="d-flex flex-column justify-content-between align-items-start rounded card p-3 bg-light shadow mx-5 my-4" style="min-width: 30%;">
+                <p><%= data.courseDetailed[i].title %> Example:</p>
+                <pre class="card border border-3 border-success border-top-0 border-end-0 border-bottom-0 rounded-0 flex-grow-1 p-2" style="width: 100%;"><%= data.courseDetailed[i].example %></pre>
+                <a href="home/try/<%= data.courseDetailed[i].title %>" class="btn btn-success py-2 rounded-pill m-2 px-5">Try it Yourself</a> 
+            </div>
+        </div>
+    <% } %>
+
+    <div class="d-flex justify-content-center gap-5 px-3 py-5 flex-wrap" style="background-color: #282A35;">
+        <% for( let i = 0; i < data.courseUndetailed.length; i++ ) { %>
+            <div class="d-flex flex-column justify-content-center align-items-center my-3 rounded learning py-3 px-2" style="min-width: 45%;">
+                <h2 class="fw-bold py-3" style="font-size: 3.5rem;"><%= data.courseUndetailed[i].title %> </h2>
+                <h3 class="fs-5 py-3"><%= data.courseUndetailed[i].description %></h3>
+                <a href="/home/<%= data.courseUndetailed[i].title %>/default" class="btn btn-dark py-2 rounded-pill m-2 mb-5" style="width: 50%;">Learn <%= data.courseUndetailed[i].title %></a>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="d-flex justify-content-center gap-5 px-3 py-5 flex-wrap" style="background-color: #282A35;">
+        <% for( let i = 0; i < data.coursesRest.length; i++ ) { %>
+            <div class="d-flex flex-column justify-content-between align-items-center my-3 rounded learning py-3 px-3" style="min-width: 20%;">
+                <a href="/home/<%= data.coursesRest[i] %>/default" class="text-decoration-none text-dark"><h2 class="fw-bold py-3 px-3" style="font-size: 2.5rem;"><%= data.coursesRest[i] %> </h2></a>
+            </div>
+        <% } %>
+    </div>
+
+    <br><br>
+
+    <div class="d-flex flex-column justify-content-center align-items-center text-light py-5" style="background-color:#282A35;">
+        <img src="assets/howItWork.png" alt="" class="my-5" width="80%">
+        <button class="btn btn-success my-3 rounded-pill px-5 fs-4 fw-bold ">Learn More</button>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center text-dark py-5 px-3" style="background-color:#96D4D4;">
+        <h2 class="fw-bold text-dark mt-5" style="font-size: 3.5rem;">Code Editor</h2>
+        <h3 class="fs-5 py-3 my-2 mb-5 text-dark">With our online code editor, you can edit code and view the result in your browser.</h3>
+        <div class="bg-dark p-3">
+            <div class="d-flex gap-3 mb-3">
+                <div class="rounded-circle p-2 bg-danger" style="height: 10px; width:10px;"></div>
+                <div class="rounded-circle p-2 bg-warning" style="height: 10px; width:10px;"></div>
+                <div class="rounded-circle p-2 bg-success" style="height: 10px; width:10px;"></div>
+                <div class="bg-secondary flex-grow-1 px-3">@pranjal_saxena</div>
+            </div>
+            <img src="assets/frontend.png" alt="" width="100%">
+        </div>
+        <a href="home/try/html" class="btn btn-success my-3 px-5 mx-3">Try Frontend Editor (HTML/CSS/JS)</a>
+        <a href="home/try/python" class="btn btn-warning px-5 mx-3">Try Backend Editor (Python/Java/PHP)</a>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center text-light py-5 px-3" style="background-color:#282A35;">
+        <h2 class="fw-bold text-light mt-5" style="font-size: 3.5rem;">Exercise & Quizzes</h2>
+        <h3 class="fs-5 py-3 my-2 mb-5 text-light">Test your skills!</h3>
+        <div class="d-flex justify-content-center gap-5 px-3 flex-wrap container" style="background-color: #282A35;">
+            <div class="d-flex flex-column justify-content-between align-items-center my-3 rounded learning py-3 px-3" style="min-width: 40%;">
+                <a href="/home/HTML/exercise" class="text-decoration-none text-dark"><h2 class="fw-bold p-5 text-dark" style="font-size: 2.5rem;">Exercise</h2></a> 
+            </div>
+            <div class="d-flex flex-column justify-content-between align-items-center my-3 rounded learning py-3 px-3" style="min-width: 40%;">
+                <a href="/home/HTML/test" class="text-decoration-none text-dark"> <h2 class="fw-bold p-5 text-dark" style="font-size: 2.5rem;">Quizzes</h2></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center text-light py-5 px-3" style="background-color:#D9EEE1;">
+        <h2 class="fw-bold text-dark mt-5" style="font-size: 3.5rem;">My Learning</h2>
+        <h3 class="fs-5 py-3 my-2 mb-5 text-dark text-center">Track your progress with our free "My Learning" program. <br>Log in to your account, and start earning points!</h3>
+        <img src="assets/myLearning.png" alt="" width="80%">
+        <% if( currUser != null) {%>
+            <a href="/profile" class="btn btn-success my-5 rounded-pill px-5 fs-4 px-5 mx-3">Go to Dashbord</a>
+            <% } else { %>
+            <a href="/signup" class="btn btn-success my-5 rounded-pill px-5 fs-4 px-5 mx-3">Sign Up for Free</a>
+            <% } %> 
+    </div>
+
+    <%- include('../includes/footer.ejs') %>
+    <script>
+        async function fetchSuggest() {
+            
+            const query = document.getElementById('search-bar').value;
+            if (query.length < 2) {
+                document.getElementById('suggestions').innerHTML = '';
+                return;
+            }
+      
+            const response = await fetch(`/search/suggestions?q=${query}`);
+            const suggestions = await response.json();
+            displaySuggestions(suggestions);
+        }
+      
+        function displaySuggestions(suggestions) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const div = document.createElement('div');
+                div.className = 'suggestion';
+                div.textContent = suggestion;
+                div.onclick = () => {
+                    window.location.href = suggestion;
+                };
+                suggestionsContainer.appendChild(div);
+            });
+        }
+      </script>
+</body>
+</html>

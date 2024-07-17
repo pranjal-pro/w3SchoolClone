@@ -1,0 +1,144 @@
+{
+    "courseDetailed": [
+        { 
+            "title":"HTML", 
+            "description": "The language for building web pages",
+            "example": "<!DOCTYPE html>\n<html>\n<head>\n<title>HTML Tutorial</title>\n</head>\n<body>\n\t<h1>This is a heading</h1>\n\t<p>This is a paragraph.</p>\n</body>\n</html>"
+        },
+        { 
+            "title":"CSS", 
+            "description": "The language for styling web pages",
+            "example": "body {\n\tbackground-color: lightblue;\n}\nh1 {\n\tcolor: white;\n\ttext-align: center;\n}\np {\n\tfont-family: verdana;\n}"
+        },
+        { 
+            "title":"JavaScript",  
+            "description": "The language for programming web pages",
+            "example": "<button onclick=\"myFunction()\">Click Me!</button>\n<script>\n\tfunction myFunction() {\n\t\tlet x = document.getElementById(\"demo\");\n\t\tx.style.fontSize = \"25px\";\n\t\tx.style.color = \"red\";\n\t}\n</script>"
+        },
+        { 
+            "title":"SQL",  
+            "description": "A language for accessing databases",
+            "example": "SELECT * FROM Customers\nWHERE Country='Mexico';"
+        },
+        { 
+            "title":"Python",  
+            "description": "A popular programming language",
+            "example": "if (5 > 2):\n\tprint(\"Five is greater than two!\")"
+        }
+    ],  
+    "courseUndetailed": [
+        { 
+            "title":"PHP", 
+            "description": "A web server programming language"
+        },
+        { 
+            "title":"jQuery", 
+            "description": "A JS library for developing web pages"
+        },
+        { 
+            "title":"Java",  
+            "description": "The programming language"
+        },
+        { 
+            "title":"C++",  
+            "description": "The programming language"
+        },
+        { 
+            "title":"Bootstrap",  
+            "description": "A CSS Framework for designing better webpages"
+        },
+        { 
+            "title":"Tailwind",  
+            "description": "A CSS Framework for designing better webpages"
+        }
+    ], 
+    "coursesRest": ["C", "C#", "R", "Kotlin", "Node.js", "React", "JSON", "Vue", "MySQL", "Sass", "SVG", "Canvas", "Git", "Pandas", "Go", "Typescript", "Django", "Data Science", "PostgreSQL", "AI ML"],
+    "dropdown": {
+        "heading": [{
+            "title": "Frontend", 
+            "list": ["HTML", "CSS", "JS", "jQuery", "React", "Bootstrap"]
+        },
+        {
+            "title":"Backend", 
+            "list": ["SQL", "PHP", "JS", "Java", "React", "C++", "R"]
+        },
+        {
+            "title":"Data Analytics",
+            "list": ["Python", "SQL", "R", "Java", "AI ML"]
+        }],
+        "page":[
+            {
+                "title":"Tutorial",
+                "list":["tutorial", "reference"]
+            },
+            {
+                "title":"Exercise",
+                "list":["exercise", "quiz"]
+            },
+            {
+                "title":"Certificate",
+                "list":["certificate", "course"]
+            },
+            {
+                "title":"All Our Services",
+                "list":[{
+                        "heading": "Free Tutorials",
+                        "description": "Enjoy our free tutorials like millions of other internet users since 2024"
+                    },
+                    {
+                        "heading": "References",
+                        "description": "Explore our selection of references covering all popular coding languages"
+                    },
+                    {
+                        "heading": "Create a Website",
+                        "description": "your own website with w3School - no setup required"
+                    },
+                    {
+                        "heading": "Exercises",
+                        "description": "Test your skills with different exercises"
+                    },
+                    {
+                        "heading": "Quizzes",
+                        "description": "Test yourself with multiple choice questions"
+                    },
+                    {
+                        "heading": "Get Certified",
+                        "description": "Document your knowledge"
+                    },
+                    {
+                        "heading": "Log in / Sign Up",
+                        "description": "Create a free W3Schools Account to Improve Your Learning Experience"
+                    },
+                    {
+                        "heading": "My Learning",
+                        "description": "Track your learning progress at w3School and collect rewards"
+                    },
+                    {
+                        "heading": "Where To Start",
+                        "description": "Not sure where you want to start? Follow our guided path"
+                    },
+                    {
+                        "heading": "Code Editor (Try it)",
+                        "description": "With our online code editor, you can edit code and view the result in your browser"
+                    },
+                    {
+                        "heading": "Web Hosting",
+                        "description": "Host your own website, and share it to the world with w3Schools"
+                    },
+                    
+                    {
+                        "heading": "Create a Server",
+                        "description": "Create your own server using Python, PHP, React.js, Node.js, Java, C#, etc."
+                    }
+                ]
+            }
+        ]
+    },
+    "try": {
+        "HTML": { "l": "HTML", "url": "https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_default" },
+        "CSS": { "l": "CSS", "url": "https://www.w3schools.com/css/tryit.asp?filename=trycss_default" },
+        "JS": { "l": "JS", "url": "https://www.w3schools.com/js/tryit.asp?filename=tryjs_default" },
+        "Python": { "l": "Python", "url": "https://www.w3schools.com/python/trypython.asp?filename=demo_indentation" },
+        "SQL": { "l": "SQL", "url": "https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_where" }
+    }
+}

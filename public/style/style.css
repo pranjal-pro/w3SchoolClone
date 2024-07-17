@@ -1,0 +1,70 @@
+:root{
+    --white: #ebebeb;
+    --dark: #282A35;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header{
+    height: 100px;
+}
+header nav ul{
+    list-style: none;
+    align-items: center;
+    height: 100%;
+}
+header nav ul li.dropdown div.dropdown-menu{
+    position: fixed !important;
+    background-color:#282A35;
+    top: 95px;
+    right: 0px;
+    width: 100vw;
+}
+
+/* Footer */
+footer{
+    color: var(--white);
+    background-color: var(--dark);
+    font-size: .5rem;
+}
+footer ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+footer ul li{
+    margin: .5rem;
+}
+footer p{
+    margin-left: 7.5rem;
+    max-width: 80%;
+    min-width: 30%;
+}
+
+/* Learning */
+.learning:nth-child(5n+ 1){
+    background-color: rgb(255, 192, 199);
+}
+.learning:nth-child(5n+ 2){
+    background-color: rgb(255, 244, 163);
+}
+.learning:nth-child(5n+ 3){
+    background-color: rgb(243, 236, 234);
+}
+.learning:nth-child(5n+ 4){
+    background-color: rgb(217, 238, 225);
+}
+.learning:nth-child(5n+ 5){
+    background-color: rgb(150, 212, 212);
+}
+
+.backBtn{
+    position: absolute;
+    right: 22px;
+    top: 70px;
+    display: none;
+}
